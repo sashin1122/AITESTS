@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sats Summariser</title>
+  <meta name="description" content="Summarise or translate any text with AI. Pay a few sats over Lightning. No account needed.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>⚡ Sats Summariser</h1>
+      <p class="tagline">Summarise or translate any text with AI. Pay a few sats over Lightning. No account, no card.</p>
+    </header>
+
+    <section id="order" class="card">
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" class="tab" data-task="summarise" aria-selected="true">Summarise</button>
+        <button type="button" role="tab" class="tab" data-task="translate" aria-selected="false">Translate</button>
+      </div>
+
+      <label for="text">Your text</label>
+      <textarea id="text" rows="10" placeholder="Paste an article, email, report…"></textarea>
+      <div class="hint"><span id="count">0</span> / <span id="max">20000</span> characters</div>
+
+      <div class="options">
+        <div data-for="summarise">
+          <label for="length">Summary length</label>
+          <select id="length">
+            <option value="short">Short (TL;DR)</option>
+            <option value="medium" selected>Medium</option>
+            <option value="detailed">Detailed</option>
+          </select>
+        </div>
+        <div data-for="translate" hidden>
+          <label for="language">Translate into</label>
+          <select id="language"></select>
+        </div>
+      </div>
+
+      <div class="buy">
+        <span id="price" class="price">–</span>
+        <button type="button" id="submit" class="primary" disabled>Get invoice</button>
+      </div>
+      <p id="order-error" class="error" hidden></p>
+    </section>
+
+    <section id="invoice" class="card" hidden>
+      <h2>Pay <span id="amount"></span> sats</h2>
+      <p class="hint">Scan with any Lightning wallet. Your result appears here as soon as the payment arrives.</p>
+      <img id="qr" alt="Lightning invoice QR code" width="280" height="280">
+      <div class="row">
+        <a id="wallet-link" class="button" href="#">Open in wallet</a>
+        <button type="button" id="copy-invoice">Copy invoice</button>
+        <button type="button" id="mock-pay" hidden>Simulate payment (dev)</button>
+      </div>
+      <p id="status" class="status">Waiting for payment…</p>
+      <button type="button" id="cancel" class="link">Start over</button>
+    </section>
+
+    <section id="result" class="card" hidden>
+      <h2>Result</h2>
+      <p id="truncated" class="hint" hidden>The output hit its length limit, so the end may be cut short.</p>
+      <div id="result-text" class="result"></div>
+      <div class="row">
+        <button type="button" id="copy-result">Copy</button>
+        <button type="button" id="again" class="primary">New request</button>
+      </div>
+    </section>
+
+    <footer>
+      <p>Prices cover the AI cost plus a small margin and are set when you request the invoice. Your text is sent to Anthropic's Claude API for processing and isn't stored after 24 hours.</p>
+    </footer>
+  </main>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
