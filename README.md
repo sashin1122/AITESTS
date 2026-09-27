@@ -1,1 +1,1 @@
-# AITESTS
+# The purpose of this project is to create some web app, preferebly decencralised that intersects the world of both AI and bitcoin to generate some form of income. start evaluating ideas and get going. a budget of R200 can be organised if necissasry.
